@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         surfaceView = (SurfaceView) findViewById(R.id.surface);
-        filePath = getInnerSDCardPath() + "/test.mp4";
+        filePath = getInnerSDCardPath() + "/test2.mp4";
+//        filePath = "http://bepvideo.baoerpai.com/00D1D5465F187F389C33DC5901307461";
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
     }

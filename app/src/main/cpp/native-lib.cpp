@@ -1,4 +1,5 @@
 #include <jni.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -23,7 +24,7 @@ extern "C" {
 JNIEXPORT jint JNICALL Java_lgy_com_ffmpegdemo_MainActivity_play
         (JNIEnv *env, jclass clazz, jstring url, jobject surface) {
     LOGD("play");
-// sd卡中的视频文件地址,可自行修改或者通过jni传入
+// sd卡中的视频文件地址,可自行修改或者通过jni传 入
     const char *file_name = env->GetStringUTFChars(url, 0);
 
     av_register_all();
@@ -141,12 +142,13 @@ JNIEXPORT jint JNICALL Java_lgy_com_ffmpegdemo_MainActivity_play
 
                 // 由于window的stride和帧的stride不同,因此需要逐行复制
                 int h;
+                long timel = (long) (1000 / frame_rate);
                 for (h = 0; h < videoHeight; h++) {
                     memcpy(dst + h * dstStride, src + h * srcStride, srcStride);
                     //复制图像速度太快,导致界面展示跟快进一样,这里睡眠,调整复制速度.
-                    //帧率18,应该是55.5毫秒左右播放一帧
                     //usleep文档说是微秒级,但是运行起来确实毫秒级,坑啊
-                    usleep(55);
+                    //播放网络视频时按帧率来计算延时时间,展示会有卡顿感,感觉应该是网络请求延时的问题
+                    usleep(timel);
                 }
 
                 ANativeWindow_unlockAndPost(nativeWindow);
