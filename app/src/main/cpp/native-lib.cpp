@@ -78,7 +78,6 @@ JNIEXPORT jint JNICALL Java_lgy_com_ffmpegdemo_MainActivity_play
     // 获取native window
     ANativeWindow *nativeWindow = ANativeWindow_fromSurface(env, surface);
 
-
     // 获取视频宽高
     int videoWidth = pCodecCtx->width;
     int videoHeight = pCodecCtx->height;
