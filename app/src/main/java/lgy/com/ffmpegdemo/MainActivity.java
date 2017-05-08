@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 //        filePath = "http://bepvideo.baoerpai.com/00D1D5465F187F389C33DC5901307461";
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
+
+        decode(filePath, getInnerSDCardPath() + "/decode.yuv");
     }
 
     /**
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
      */
     public static native int play(String url, Object surface);
 
+    public static native int decode(String inputurl, String outputurl);
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -45,12 +49,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                play(filePath, surfaceHolder.getSurface());
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                play(filePath, surfaceHolder.getSurface());
+//            }
+//        }).start();
 
     }
 
